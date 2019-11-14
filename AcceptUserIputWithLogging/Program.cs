@@ -1,6 +1,7 @@
 ﻿using System;
+using System.IO;
 
-namespace AcceptUserInput
+namespace AcceptUserIputWithLogging
 {
     class Program
     {
@@ -15,7 +16,7 @@ namespace AcceptUserInput
             string usersBirthDate = Console.ReadLine();
             int number1;
             bool results = int.TryParse(usersBirthDate, out number1);
-            
+
             if (results)
             {
                 int currentYear = DateTime.Today.Year;
@@ -27,6 +28,7 @@ namespace AcceptUserInput
             else
             {
                 Console.WriteLine("Thank you " + userName + "! I am sorry I can't tell your age.");
+                File.AppendAllText("log.txt", DateTime.Now + ": " + userName + ": " + usersBirthDate + Environment.NewLine);
             }
         }
     }
