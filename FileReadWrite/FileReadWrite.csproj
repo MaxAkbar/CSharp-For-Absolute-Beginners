@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FileHelper\FileHelper.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="ProcessMe.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
