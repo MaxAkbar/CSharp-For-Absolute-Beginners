@@ -7,28 +7,27 @@ namespace AcceptUserIputWithLogging
     {
         static void Main(string[] args)
         {
-            // 1. provding some info for the user "What is your name?"
-            // 2. ask user what year they were born.
-            Console.WriteLine("What is your name?");
-            string userName = Console.ReadLine();
+            // Ask the user for their name:
+            // Capture the input
+            Console.WriteLine("Hello what's your name?");
+            string username = Console.ReadLine();
 
+            // Ask the user for the year they were born:
+            // Capture the input
             Console.WriteLine("What year were you born?");
-            string usersBirthDate = Console.ReadLine();
-            int number1;
-            bool results = int.TryParse(usersBirthDate, out number1);
+            string yearBorn = Console.ReadLine();
 
-            if (results)
+            if (int.TryParse(yearBorn, out var userAge))
             {
-                int currentYear = DateTime.Today.Year;
-                int yearsOld = currentYear - number1;
+                var userAgeConverted = DateTime.Now.Year - userAge;
 
-                // 3. out put user name with age
-                Console.WriteLine("Thank you " + userName + "! You are " + yearsOld + " years old.");
+                // Display a message to the user "Hello {user} you were {x} years old."
+                Console.WriteLine($"Hello {username} you are {userAgeConverted} years old.");
             }
             else
             {
-                Console.WriteLine("Thank you " + userName + "! I am sorry I can't tell your age.");
-                File.AppendAllText("log.txt", DateTime.Now + ": " + userName + ": " + usersBirthDate + Environment.NewLine);
+                Console.WriteLine($"Hello {username}, I am sorry we can not tell your age.");
+                File.AppendAllText("log.txt", $"{DateTime.Now} : {username} : {yearBorn} {Environment.NewLine}");
             }
         }
     }
