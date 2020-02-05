@@ -8,27 +8,28 @@ namespace FileReadWrite
     {
         static void Main(string[] args)
         {
-            //string fileContent = File.ReadAllText("SimpleText.txt");
+            //string fileContent2 = File.ReadAllText("SimpleText.txt");
 
-            // 1. read csv file line by line
+            // 1. Read proessMe.csv file
             string[] fileContent = File.ReadAllLines("ProcessMe.csv");
 
-            // 2. search for model get the value
-            for (int i = 0; i < fileContent.Length; i++)
+            // 2. iterate through the file result
+            for (int i = 0; fileContent.Length > i; i++)
             {
-                string line = fileContent[i];
-
-                if (line.Contains("Ford"))
+                // 3. skip the header information and read line by line
+                if (i == 0)
                 {
-                    // 3. output the price
-                    string[] columns = line.Split(',');
-
-                    File.AppendAllText("processedFile.txt", columns[1] + ": " + columns[3]);
-                    //Console.WriteLine(columns[3]);
+                    continue;
                 }
-            }
 
-            //Console.WriteLine(fileContent);
+                // 4. check the price if greater than three thousand then output the data to the console
+                string[] line = fileContent[i].Split(',');
+                decimal.TryParse(line[3], out decimal intPrice);
+
+                if(intPrice > 3000)
+                {
+                    Console.WriteLine($"{line[1]} : {line[3]}");
+                }
         }
     }
 }
